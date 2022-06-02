@@ -16,7 +16,7 @@ jobs:
         run: echo "The JS output message is ${{ steps.hello.outputs.message }}"
       - name: Hello Docker action step
         id: helloDocker
-        uses: JacobKorn/gh-actions-ruby-test@v1.1
+        uses: JacobKorn/gh-actions-ruby-test@v1.2
         with:
           who-to-greet: 'Joe'
           message: "${{ steps.hello.outputs.message }}"

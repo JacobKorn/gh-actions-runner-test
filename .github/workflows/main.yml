@@ -1,27 +1,24 @@
 on: [push]
 
 jobs:
-  hello_js_job:
+  hello_multistep_job:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - name: Hello world action step
+      - name: Hello JS action step
         id: hello
-        uses: JacobKorn/gh-actions-js-test@v1.1
+        uses: JacobKorn/gh-actions-js-test@v1.2
         with:
           who-to-greet: 'everyone'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
-  hello_ruby_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-      - name: Hello world action step
-        id: hello
-        uses: JacobKorn/gh-actions-ruby-test@v1
+      - name: Get the JS output time
+        run: echo "The JS time was ${{ steps.hello.outputs.time }}"
+      - name: Get the JS output message
+        run: echo "The JS output message is ${{ steps.hello.outputs.message }}"
+      - name: Hello Docker action step
+        id: helloDocker
+        uses: JacobKorn/gh-actions-ruby-test@v1.1
         with:
           who-to-greet: 'Joe'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          message: "${{ steps.hello.outputs.message }}"
+      - name: Get the Docker output time
+        run: echo "The docker hello time was ${{ steps.helloDocker.outputs.time }}"

@@ -1,7 +1,7 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  hello_js_job:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
@@ -10,6 +10,18 @@ jobs:
         uses: JacobKorn/gh-actions-js-test@v1.1
         with:
           who-to-greet: 'everyone'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+  hello_ruby_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Hello world action step
+        id: hello
+        uses: JacobKorn/gh-actions-ruby-test@v1
+        with:
+          who-to-greet: 'Joe'
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
